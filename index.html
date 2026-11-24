@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>周曾华(Zenghua Zhou) · 天体物理博士</title>
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --bg:#05070d;
+    --text:#e8ecf5;
+    --muted:#8b95ad;
+    --soft:#b9c2d6;
+    --accent:#7cc4ff;
+    --accent2:#b98cff;
+    --line:rgba(140,160,200,.16);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Source Han Serif SC","Songti SC","SimSun",Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+    --mono:"SF Mono","JetBrains Mono",Menlo,Consolas,"Courier New",monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{background:var(--bg);scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+
+  body{
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.78;
+    color:var(--text);
+    background:transparent;
+    position:relative;
+    z-index:0;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* ---------- 星空背景 ---------- */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+      radial-gradient(1100px 720px at 12% -8%, rgba(86,116,255,.20), transparent 62%),
+      radial-gradient(900px 620px at 88% 2%, rgba(168,102,255,.15), transparent 62%),
+      radial-gradient(1200px 820px at 50% 108%, rgba(56,180,200,.10), transparent 62%),
+      linear-gradient(180deg,#070a12 0%, #06080f 55%, #04060c 100%);
+  }
+
+  #sky{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  /* ---------- 布局 ---------- */
+  main{
+    position:relative;
+    z-index:1;
+    max-width:790px;
+    margin:0 auto;
+    padding:clamp(3rem,8vw,6rem) clamp(1.25rem,5vw,2rem) 3rem;
+  }
+
+  /* ---------- 顶部 ---------- */
+  .hero{
+    text-align:center;
+    padding-bottom:3rem;
+    margin-bottom:3.5rem;
+    border-bottom:1px solid var(--line);
+  }
+
+  .status{
+    display:inline-flex;
+    align-items:center;
+    gap:.55rem;
+    font-size:.76rem;
+    letter-spacing:.06em;
+    color:var(--muted);
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.025);
+    padding:.35rem .95rem;
+    border-radius:999px;
+  }
+
+  .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:#5ee6a8;
+    box-shadow:0 0 9px #5ee6a8;
+    animation:pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:.35;transform:scale(.75);}
+  }
+
+  .hero h1{
+    font-family:var(--serif);
+    font-size:clamp(2.2rem,7vw,3.3rem);
+    font-weight:600;
+    letter-spacing:.12em;
+    line-height:1.25;
+    margin:1.3rem 0 .4rem;
+    background:linear-gradient(180deg,#ffffff 20%, #b9d4ff 130%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .roman{
+    font-family:var(--serif);
+    font-size:.78rem;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-indent:.34em;
+  }
+
+  .tagline{
+    font-size:1.02rem;
+    color:#c6cee2;
+    max-width:30em;
+    margin:1.5rem auto 0;
+  }
+
+  .affil{
+    font-size:.9rem;
+    color:var(--muted);
+    margin-top:.55rem;
+  }
+
+  .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.6rem;
+    justify-content:center;
+    margin-top:1.9rem;
+  }
+
+  .links a{
+    font-size:.85rem;
+    color:#cfd8ea;
+    text-decoration:none;
+    padding:.45rem 1.05rem;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:rgba(255,255,255,.022);
+    transition:all .28s ease;
+  }
+  .links a:hover{
+    color:#fff;
+    border-color:rgba(124,196,255,.6);
+    background:rgba(124,196,255,.1);
+    box-shadow:0 0 22px rgba(124,196,255,.18);
+    transform:translateY(-1px);
+  }
+
+  /* ---------- 章节 ---------- */
+  .section{margin-bottom:3.6rem;}
+
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+    font-family:var(--serif);
+    font-size:1.14rem;
+    font-weight:600;
+    letter-spacing:.14em;
+    margin-bottom:1.7rem;
+    color:#eef3ff;
+  }
+  .section-title .num{
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.1em;
+    color:var(--accent);
+    opacity:.9;
+  }
+  .section-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--line), transparent);
+  }
+
+  .section p{
+    color:var(--soft);
+    font-size:.95rem;
+    margin-bottom:1rem;
+  }
+  .section p:last-child{margin-bottom:0;}
+
+  /* ---------- 研究兴趣 ---------- */
+  .interests{list-style:none;}
+
+  .interests li{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:.25rem 1.2rem;
+    padding:.85rem 0;
+    border-bottom:1px dashed rgba(140,160,200,.13);
+  }
+  .interests li:last-child{border-bottom:none;}
+
+  .interests strong{
+    font-weight:600;
+    font-size:.96rem;
+    color:#eaf0ff;
+    min-width:9.5em;
+  }
+
+  .interests span{
+    flex:1;
+    min-width:13rem;
+    font-size:.88rem;
+    color:var(--muted);
+  }
+
+  /* ---------- 时间线 ---------- */
+  .timeline{
+    position:relative;
+    padding-left:1.6rem;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:5px;
+    top:.55rem;
+    bottom:.9rem;
+    width:1px;
+    background:linear-gradient(180deg, rgba(124,196,255,.55), rgba(124,196,255,.06));
+  }
+
+  .tl-item{
+    position:relative;
+    padding-bottom:1.9rem;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    left:calc(-1.6rem + 1px);
+    top:.6rem;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#0a0f1b;
+    border:1.5px solid var(--accent);
+    box-shadow:0 0 12px rgba(124,196,255,.55);
+  }
+
+  .tl-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:.25rem .8rem;
+  }
+
+  .tl-item h3{
+    font-size:1rem;
+    font-weight:600;
+    color:#eaf0ff;
+    letter-spacing:.02em;
+  }
+
+  .tl-period{
+    font-family:var(--mono);
+    font-size:.76rem;
+    letter-spacing:.04em;
+    color:var(--accent);
+    white-space:nowrap;
+  }
+
+  .tl-org{
+    font-size:.9rem;
+    color:#a9b4ca;
+    margin-top:.15rem;
+  }
+
+  .tl-desc{
+    font-size:.88rem;
+    color:var(--muted);
+    margin-top:.4rem;
+  }
+
+  /* ---------- 论文 ---------- */
+  .papers{
+    list-style:none;
+    counter-reset:p;
+  }
+
+  .papers li{
+    position:relative;
+    counter-increment:p;
+    padding:.95rem 0 .95rem 2.5rem;
+    border-bottom:1px solid rgba(140,160,200,.09);
+  }
+  .papers li:last-child{border-bottom:none;}
+
+  .papers li::before{
+    content:counter(p);
+    position:absolute;
+    left:0;
+    top:1.05rem;
+    width:1.55rem;
+    height:1.55rem;
+    display:grid;
+    place-items:center;
+    font-family:var(--mono);
+    font-size:.7rem;
+    color:var(--accent);
+    border:1px solid rgba(124,196,255,.3);
+    border-radius:50%;
+    opacity:.85;
+  }
+
+  .paper-title{
+    display:block;
+    font-size:.95rem;
+    color:#e2e8f6;
+    line-height:1.6;
+  }
+
+  .paper-meta{
+    display:block;
+    font-size:.8rem;
+    color:var(--muted);
+    margin-top:.3rem;
+  }
+
+  .paper-journal{
+    color:var(--accent2);
+    font-family:var(--serif);
+    font-style:italic;
+  }
+
+  .tag-first{
+    display:inline-block;
+    font-size:.66rem;
+    letter-spacing:.06em;
+    color:#8ff0c4;
+    border:1px solid rgba(143,240,196,.3);
+    border-radius:4px;
+    padding:0 .35rem;
+    margin-left:.35rem;
+    vertical-align:1px;
+    font-family:var(--sans);
+  }
+
+  /* ---------- 技能 ---------- */
+  .skills{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(215px,1fr));
+    gap:1rem;
+  }
+
+  .skill-card{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:1.05rem 1.15rem;
+    background:linear-gradient(160deg, rgba(255,255,255,.028), rgba(255,255,255,.008));
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .skill-card:hover{
+    border-color:rgba(124,196,255,.35);
+    transform:translateY(-2px);
+  }
+
+  .skill-card h4{
+    font-size:.78rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    color:var(--accent);
+    margin-bottom:.5rem;
+  }
+
+  .skill-card p{
+    font-size:.85rem;
+    color:#a9b4ca;
+    line-height:1.7;
+  }
+
+  /* ---------- 联系方式 ---------- */
+  .contact{
+    display:grid;
+    gap:.1rem;
+  }
+
+  .contact-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.3rem 1.1rem;
+    align-items:baseline;
+    padding:.7rem 0;
+    border-bottom:1px dashed rgba(140,160,200,.12);
+    font-size:.9rem;
+  }
+  .contact-row:last-child{border-bottom:none;}
+
+  .contact-row .label{
+    min-width:5.5em;
+    font-size:.76rem;
+    letter-spacing:.1em;
+    color:var(--accent);
+    font-family:var(--mono);
+  }
+
+  .contact-row a, .contact-row span{
+    color:#c2cbe0;
+    text-decoration:none;
+    word-break:break-all;
+  }
+
+  .contact-row a{
+    border-bottom:1px solid rgba(124,196,255,.25);
+    transition:color .25s, border-color .25s;
+  }
+  .contact-row a:hover{color:#fff;border-color:var(--accent);}
+
+  /* ---------- 页脚 ---------- */
+  footer{
+    margin-top:4rem;
+    padding-top:1.8rem;
+    border-top:1px solid var(--line);
+    text-align:center;
+    font-size:.76rem;
+    letter-spacing:.05em;
+    color:rgba(139,149,173,.75);
+    line-height:2;
+  }
+
+  footer .glyph{
+    display:block;
+    font-size:1rem;
+    color:rgba(124,196,255,.5);
+    margin-bottom:.6rem;
+  }
+
+  /* ---------- 滚动淡入 ---------- */
+  .js .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1);
+  }
+  .js .reveal.in{
+    opacity:1;
+    transform:none;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .js .reveal{opacity:1;transform:none;transition:none;}
+    .dot{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  @media (max-width:560px){
+    body{font-size:15px;}
+    .interests strong{min-width:100%;}
+    .tl-head{flex-direction:column;}
+    .paper-title{font-size:.9rem;}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<main>
+
+  <!-- ============ 头部 ============ -->
+  <header class="hero reveal">
+    <span class="status"><span class="dot"></span>博士后 · Postdoc</span>
+    <h1>周曾华</h1>
+    <p class="roman">Zhou Zenghua · Astrophysics</p>
+    <p class="tagline">基于多波段测光巡天观测数据推导星系中恒星字结构的星族星系，证认新结构，限制结构形成与演化。</p>
+    <p class="affil">中国科学技术大学 天文学系 · 中国科大观测天文学课题组</p>
+    <nav class="links">
+      <a href="mailto:zhouzenghua@ustc.edu.cn">Email</a>
+      <a href="#" title="arXiv">arXiv</a>
+      <a href="#" title="ORCID">ORCID</a>
+      <a href="#" title="GitHub">GitHub</a>
+      <a href="#" title="Curriculum Vitae">CV (PDF)</a>
+    </nav>
+  </header>
+
+  <!-- ============ 关于 ============ -->
+  <section class="section reveal">
+    <h2 class="section-title"><span class="num">01</span>关于我</h2>
+    <p>我目前是中国科学技术大学天文学系的博士后研究员，范璐璐教授课题组，合作导师是宛振研究员，研究方向为测光巡天观测。我的工作把当前和未来大型巡天项目的多波段测光巡天数据放在同一张桌子上分析探讨，试图回答星系中的恒星结构如星团和矮星系等的形成与演化，以及与宿主星系和周围环境之间的相互作用，进一步研究近场宇宙尺度下星系的形成与演化。</p>
+    <p>具体而言，我关注低质量星系中的恒星形成反馈、星族参数信息，以及探索环星系介质（CGM）中重子物质与金属的循环过程。</p>
+    <p>在观测之外，我的日常工作时用代码把数据画成图——并且相信一张好图胜过长篇推导。</p>
+  </section>
+
+  <!-- ============ 研究兴趣 ============ -->
+  <section class="section reveal">
+    <h2 class="section-title"><span class="num">02</span>研究兴趣</h2>
+    <ul class="interests">
+      <li>
+        <strong>测光巡天观测</strong>
+        <span>SDSS、Gaia、2MASS、CSST等代表性巡天项目</span>
+      </li>
+      <li>
+        <strong>多色测光数据处理</strong>
+        <span>巡天系统测光零点校准、红外流量法(IRFM)</span>
+      </li>
+      <li>
+        <strong>机器学习在天文中的应用</strong>
+        <span>多波段测光数据的自动化处理</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 教育与经历 ============ -->
+  <section class="section reveal">
+    <h2 class="section-title"><span class="num">03</span>教育与研究经历</h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>博士后研究员 · 天体物理学</h3>
+          <span class="tl-period">2026.11 — 至今</span>
+        </div>
+        <p class="tl-org">中国科学技术大学 天文学系</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>博士研究生 · 天体物理学</h3>
+          <span class="tl-period">2020.09 — 2026.10</span>
+        </div>
+        <p class="tl-org">中国科学院大学 中国科学院云南天文台 · 导师：陈雪飞 研究员</p>
+        <p class="tl-desc">博士论文：《基于红外流量法的测光系统校准与恒星有效温度标定》。</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>访问学生（联合培养）</h3>
+          <span class="tl-period">2023.04 — 2025.05</span>
+        </div>
+        <p class="tl-org">澳大利亚国立大学（ANU）天文与天体物理研究所（RSAA），澳大利亚堪培拉</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>理学学士 · 天文学</h3>
+          <span class="tl-period">2016.09 — 2020.07</span>
+        </div>
+        <p class="tl-org">云南大学 物理与天文学院</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 代表论文 ============ -->
+  <section class="section reveal">
+    <h2 class="section-title"><span class="num">04</span>代表论文</h2>
+    <ol class="papers">
+
+      <li>
+        <span class="paper-title">Recalibration of SDSS photometric zero-points based on the InfraRed Flux Method temperature scale</span>
+        <span class="paper-meta">Zhou Z, Casagrande L, Xiong H., et al. · <span class="paper-journal">MNRAS</span>, 2026,  549(3), stag942</span>
+      </li>
+
+      <li>
+        <span class="paper-title">Empirical colour─effective temperature relations in the SDSS system from IRFM temperatures of GALAH and APOGEE stars</span>
+        <span class="paper-meta">Zhou Z, Casagrande L, Zhang X., et al. · <span class="paper-journal">MNRAS</span>, 2026,  549(4), stag1009</span>
+      </li>
+
+      <li>
+        <span class="paper-title">Detection of 12 426 SB2 candidates in the LAMOST-MRS, using a binary spectral model<span class="tag-first">二作</span></span>
+        <span class="paper-meta">Kovalev M, Zhou Z, Chen X, et al. · <span class="paper-journal">MNRAS</span>, 2024, 527(1), 521-530</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============ 技能 ============ -->
+  <section class="section reveal">
+    <h2 class="section-title"><span class="num">05</span>技能与工具</h2>
+    <div class="skills">
+
+      <div class="skill-card">
+        <h4>编程语言</h4>
+        <p>Python（NumPy / SciPy / Astropy / Pandas）、ADQL(SQL)、LaTeX</p>
+      </div>
+
+      <div class="skill-card">
+        <h4>观测数据处理</h4>
+        <p>SDSS / SDSS Gaia 2MASS多波段数据处理、图像测光</p>
+      </div>
+
+      <div class="skill-card">
+        <h4>语言</h4>
+        <p>中文（母语）、英语（CET-6，可独立撰写英文论文与学术报告）</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 联系方式 ============ -->
+  <section class="section reveal">
+    <h2 class="section-title"><span class="num">06</span>联系方式</h2>
+    <div class="contact">
+
+      <div class="contact-row">
+        <span class="label">EMAIL</span>
+        <a href="mailto:zhouzenghua@ustc.edu.cn">zhouzenghua@ustc.edu.cn</a>
+      </div>
+
+      <div class="contact-row">
+        <span class="label">OFFICE</span>
+        <span>中国科学技术大学 物质科研楼</span>
+      </div>
+
+      <div class="contact-row">
+        <span class="label">ADDRESS</span>
+        <span>中国 · 安徽省合肥市 金寨路 96 号 中国科学技术大学天文学系（邮编 230026）</span>
+      </div>
+
+      <div class="contact-row">
+        <span class="label">PROFILES</span>
+        <span>
+          <a href="#">arXiv</a> ·
+          <a href="#">ORCID</a> ·
+          <a href="#">GitHub</a> ·
+          <a href="#">ResearchGate</a>
+        </span>
+      </div>
+
+      <div class="contact-row">
+        <span class="label">NOTE</span>
+        <span>欢迎来信讨论，也乐于接收合作与审稿邀请。</span>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span class="glyph">✦</span>
+    © 2026 周曾华 · 本页面以 HTML 与 CSS 手工编写<br>
+    最后更新于 2026 年 11 月
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  var canvas = document.getElementById("sky");
+  var ctx = canvas.getContext("2d");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var W = 0, H = 0, dpr = 1;
+  var stars = [];
+
+  function buildStars() {
+    var count = Math.min(460, Math.round((W * H) / 6800));
+    stars = [];
+    for (var i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.pow(Math.random(), 2) * 1.25 + 0.25,
+        base: Math.random() * 0.42 + 0.14,
+        amp: Math.random() * 0.32,
+        speed: Math.random() * 1.5 + 0.25,
+        phase: Math.random() * Math.PI * 2,
+        warm: Math.random() < 0.16
+      });
+    }
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+
+    canvas.width = Math.floor(W * dpr);
+    canvas.height = Math.floor(H * dpr);
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildStars();
+
+    if (reduceMotion) render(0);
+  }
+
+  function render(t) {
+    ctx.clearRect(0, 0, W, H);
+    var seconds = t / 1000;
+
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var alpha = reduceMotion
+        ? s.base
+        : Math.max(0.02, s.base + Math.sin(seconds * s.speed + s.phase) * s.amp);
+
+      var rgb = s.warm ? "255,218,186" : "203,224,255";
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(" + rgb + "," + alpha.toFixed(3) + ")";
+      ctx.fill();
+    }
+  }
+
+  function loop(t) {
+    render(t);
+    window.requestAnimationFrame(loop);
+  }
+
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(resize, 150);
+  }, { passive: true });
+
+  resize();
+  if (!reduceMotion) window.requestAnimationFrame(loop);
+
+  /* ---------- 滚动淡入 ---------- */
+  var revealEls = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("in"); });
+  }
+})();
+</script>
+
+</body>
+</html>
